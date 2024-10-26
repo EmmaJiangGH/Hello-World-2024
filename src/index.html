@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamified Study Tracker</title>
+    <title>Study Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +18,9 @@
                 <button onclick="startPomodoro()">Start</button>
                 <button onclick="pausePomodoro()">Pause</button>
                 <button onclick="resetPomodoro()">Reset</button>
+                <div id="cycle-display" aria-label="Pomodoro Cycle Display"></div>
             </div>
+
             <div id="todo-list">
                 <h2>To Do List</h2>
                 <input type="text" id="todo-input" placeholder="Add a new task">
@@ -26,6 +28,7 @@
                 <ul id="tasks"></ul>
             </div>
         </div>
+        <button id="save-data-button" style="position: fixed; bottom: 20px; right: 20px;">Save Progress</button>
     </div>
     <script src="script.js"></script>
 </body>

@@ -107,6 +107,26 @@ h1 {
     background-color: #267029;
 }
 
+#cycle-display {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.cycle-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: grey;
+    transition: background-color 0.3s ease;
+}
+
+.cycle-indicator.completed {
+    background-color: green;
+}
+
+
 /* Timer Display */
 #timer {
     font-size: 2em;
