@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: OCR A Std, monospace;
+    background-color: #71F79F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 1000px;
+    background-color: #3DD6D0;
+    padding: 5%;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header, main, footer {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #3DD6D0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.sections-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.section {
+    width: 48%;
+    padding: 20px;
+    background-color: #CAF0F8;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.section h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Pomodoro Section */
+#pomodoro, #todo-list {
+    background-color: #e0f7fa; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    flex: 1; /* Allow sections to grow equally */
+}
+
+#pomodoro {
+    margin-right: 10px; /* Add space between sections */
+}
+
+#todo-list {
+    margin-left: 10px; /* Add space between sections */
+}
+
+/* Pomodoro Subsection Title Styling */
+#pomodoro h2, #todo-list h2 {
+    font-size: 1.5em;
+    color: #000;
+    text-align: center;
+    margin-top: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Pomodoro Buttons */
+#pomodoro button {
+    background-color: #319335;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#pomodoro button:hover {
+    background-color: #267029;
+}
+
+/* Timer Display */
+#timer {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+/* To-do List Styling */
+#todo-list input[type="text"] {
+    width: calc(100% - 40px);
+    padding: 10px;
+    border: 2px solid #B0C4DE;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+/* Tasks List Styling */
+#tasks {
+    list-style: none;
+    padding: 0;
+}
+
+#tasks li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between checkbox and text */
+}
+
+#tasks li input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#todo-list button {
+    background-color: #319335;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    display: block; /* Make the button a block element */
+    width: fit-content; /* Adjust button width to fit text */
+    margin: 10px auto; /* Center the button */
+}
+
+#todo-list button:hover {
+    background-color: #267029;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .sections-container {
+        flex-direction: column; /* Stack sections vertically on small screens */
+    }
+    
+    #pomodoro, #todo-list {
+        width: 100%; /* Full width on small screens */
+        margin-right: 0; /* Remove margin */
+        margin-left: 0; /* Remove margin */
+    }
+}
