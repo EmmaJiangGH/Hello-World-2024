@@ -21,4 +21,9 @@ export default class Background {
 
   draw() {
     this.ctx.drawImage(this.bgImage, this.x, this.y, this.width, this.height);
+  }
+
+  update() {
+    this.x -= 5;
+  }
 }
