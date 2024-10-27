@@ -16,6 +16,7 @@ sprite.draw();
 
 function setScreen(){
     scaleRatio = getScaleRatio();
+    createSprites();
 }
 
 function getScaleRatio(){
