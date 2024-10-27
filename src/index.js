@@ -13,6 +13,7 @@ const BG_SPEED = 0.3;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let sprite = null;
+let bg - null;
 let scaleRatio = null;
 let previousTime = null;
 
@@ -26,11 +27,8 @@ function createSprites(){
     const bgHeightInGame = BG_HEIGHT * scaleRatio;
 
     bg = new Background(ctx, bgWidthInGame, bgHeightInGame, BG_SPEED, scaleRatio);
+    bg.loadImage('../images/bg.jpg');
 }
-
-//Draw objects
-sprite.draw();
-bg.draw();
 
 function setScreen(){
     scaleRatio = getScaleRatio();
@@ -64,6 +62,7 @@ function gameLoop(currentTime) {
 
     //update game objects
     bg.update(frameTimeDelta);
+    bg.draw();
 
     
     requestAnimationFrame(gameLoop);
