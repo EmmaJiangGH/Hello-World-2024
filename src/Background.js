@@ -1,34 +1,34 @@
-//draws background in
-//animation
-//getAnimationFrame
-//write gameLoop function
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 
-export default class Background {
-  constructor(ctx, width, height, speed, scaleRatio) {
-    this.ctx = ctx;
-    this.canvas = ctx.canvas;
-    this.width = width;
-    this.height = height;
-    this.speed = speed;
-    this.scaleRatio = scaleRatio;
-    this.image = new Image();
-    this.image.src = './images/bg.jpg';
-
-    this.x = 0;
-    this.y = 0;
-  }
-
-  draw() {
-    this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    this.ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
-
-    if(this.x < -this.width) {
-      this.x = 0;
-    }
-  }
-
-  update(frameTimeDelta) {
-    this.x -= this.speed * frameTimeDelta * this.scaleRatio;
-  }
-
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+const backgroundImg = new Image();
+backgroundImg.src = "../images/bg.jpg";
+
+let backgroundX = 0;
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.drawImage(backgroundImg, backgroundX, 0, canvas.width, canvas.height);
+    ctx.drawImage(backgroundImg, backgroundX + canvas.width, 0, canvas.width, canvas.height);
+
+    backgroundX -= 2;
+
+    if (backgroundX <= -canvas.width) {
+        backgroundX = 0;
+    }
+
+    requestAnimationFrame(draw);
+}
+
+backgroundImg.onload = () => {
+    draw();
+};
