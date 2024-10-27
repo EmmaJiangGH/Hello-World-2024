@@ -1,63 +1,50 @@
 import pandas as pd
-import datetime as dt
 
-class Cummulative_Data_Analysis:
-    def __init__(self, mean, num_days, median, std, maxim, minim):
-        self.mean = mean
-        self.num_days = num_days
-        self.median = median
-        self.std = std
-        self.maxim = maxim
-        self.minim = minim
+class Cumulative_Data_Analysis:
+    def __init__(self, past_data_file, new_data_file):
+        self.mean = None
+        self.num_days = None
+        self.median = None
+        self.std = None
+        self.maxim = None
+        self.minim = None
+        self.past_data_file = past_data_file
+        self.new_data_file = new_data_file
 
-    def get_mean(self):
-        return self.mean
+    def analyze_data(self):
+        df = pd.read_json(self.past_data_file)
+        print("Available columns:", df.columns)
+        # self.mean = df['Tasks Completed'].mean()
+        # self.num_days = df.shape[0]
+        # self.median = df['Tasks Completed'].median()
+        # self.std = df['Tasks Completed'].std()
+        # self.maxim = df['Tasks Completed'].max()
+        # self.minim = df['Tasks Completed'].min()
 
-    def get_num_days(self):
-        return self.num_days
+    def update_data(self):
+        # Load existing data and new data
+        df = pd.read_json(self.past_data_file)
+        new_entry = pd.read_json(self.new_data_file)
 
-    def get_median(self):
-        return self.median
+        if not new_entry.empty:
+            # Iterate through new entries
+            for _, new_row in new_entry.iterrows():
+                date = new_row['Date']
+                # Check if the date already exists in the DataFrame
+                if date in df['Date'].values:
+                    # Update the existing row with new_row data
+                    df.loc[df['Date'] == date, new_row.index] = new_row
+                else:
+                    # Append new row
+                    df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
 
-    def get_std(self):
-        return self.std
+            # Save the updated DataFrame back to the JSON file
+            df.to_json(self.past_data_file, orient='records', indent=4)  # Use indent for pretty formatting
 
-    def get_maxim(self):
-        return self.maxim
+    def get_statistics(self):
+        return "mean: " + self.mean + "\nnum_days: " + self.num_days + "\nmedian: " + self.median + "\nstd: " + self.std + "\nmaxim: " + self.maxim + "\nminim: " + self.minim
 
-    def get_minim(self):
-        return self.minim
-
-    def set_mean(self, mean):
-        self.mean = mean
-
-    def set_num_days(self, num_days):
-        self.num_days = num_days
-
-    def set_median(self, median):
-        self.median = median
-
-    def set_std(self, std):
-        self.std = std
-
-    def set_maxim(self, maxim):
-        self.maxim = maxim
-
-    def set_minim(self, minim):
-        self.minim = minim
-
-    def analyze_data(self, past_data_file):
-        df = pd.read_csv('data.csv')
-        self.set_mean(df.mean(axis=1))
-        self.set_num_days(df.shape[0])
-        self.set_median(df.median(axis=1))
-        self.set_std(df.std(axis=1))
-        self.set_maxim(df.max(axis=1))
-        self.set_minim(df.min(axis=1))
-
-    def update_data(self, date_input, time_input, tasks_completed_input):
-        df = pd.read_csv('data.csv')
-        new_entry = pd.DataFrame({'Date': [date_input],'Time': [time_input],'Tasks Completed': [tasks_completed]})
-        df = pd.concat([df, new_entry], ignore_index=True)
-        df.to_csv('data.csv', index=False)
-      
+analysis = Cumulative_Data_Analysis('old_data.json', 'new_data.json')
+analysis.update_data()
+analysis.analyze_data()
+# print(analysis.get_statistics())
