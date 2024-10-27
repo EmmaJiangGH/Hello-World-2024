@@ -13,20 +13,22 @@ class Cumulative_Data_Analysis:
 
     def analyze_data(self):
         df = pd.read_json(self.past_data_file)
-        self.mean = df['minutes_spent_studying'].mean(skipna=False)
-        self.num_days = df['tasks_completed'].shape[0]
-        self.median = df['minutes_spent_studying'].median(skipna=False)
-        self.std = df['minutes_spent_studying'].std(skipna=False)
-        self.maxim = df['minutes_spent_studying'].max(skipna=False)
-        self.minim = df['minutes_spent_studying'].min(skipna=False)
+        self.mean = df['workCycles'].mean(skipna=False)
+        self.num_days = df.shape[0]
+        self.median = df['workCycles'].median(skipna=False)
+        self.std = df['workCycles'].std(skipna=False)
+        self.maxim = df['workCycles'].max(skipna=False)
+        self.minim = df['workCycles'].min(skipna=False)
 
     def update_data(self):
         df = pd.read_json(self.past_data_file)
-        print(df.to_string())
         new_entry = pd.read_json(self.new_data_file)
-        if not new_entry.empty:
+        if df.empty:
+            df = new_entry
+        elif not new_entry.empty:
             df = pd.concat([df, new_entry], ignore_index=True)
             df.to_json(self.past_data_file, orient='records', indent=4)  # Use indent for pretty formatting
+        print(df.to_string())
 
     def get_statistics(self):
         return (
@@ -39,7 +41,7 @@ class Cumulative_Data_Analysis:
         )
 
 
-analysis = Cumulative_Data_Analysis('old_data.json', 'new_data.json')
+analysis = Cumulative_Data_Analysis('old_data.json', 'progress.json')
 analysis.update_data()
 analysis.analyze_data()
 print(analysis.get_statistics())
