@@ -1,6 +1,6 @@
 //draws sprite onto webpage
 export default class SpriteImage {
-    constructor(ctx,width, height, scaleRatio){
+    constructor(ctx, width, height, scaleRatio){
         this.ctx = ctx;
         this.canvas = ctx.canvas;
         this.width = width;
