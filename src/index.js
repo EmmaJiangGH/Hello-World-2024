@@ -1,3 +1,5 @@
+import Background from "./Background.js";
+
 const WINDOW_WIDTH = 800;
 const WINDOW_HEIGHT = 200;
 const SPRITE_WIDTH = 88 / 1.5;
