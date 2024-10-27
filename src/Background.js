@@ -14,9 +14,6 @@ export default class Background {
 
     this.x = 0;
     this.y = 0;
-
-    this.bgImage = new Image();
-    this.bgImage.src = '/images/backgroundImage.jpg';
   }
 
   draw() {
@@ -30,5 +27,10 @@ export default class Background {
 
   update(frameTimeDelta) {
     this.x -= this.speed * frameTimeDelta * this.scaleRatio;
+  }
+
+  loadImage(imageSrc) {
+    this.image = new Image();
+    this.image.src = imageSrc;
   }
 }
