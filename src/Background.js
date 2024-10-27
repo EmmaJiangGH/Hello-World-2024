@@ -16,7 +16,7 @@ export default class Background {
     this.y = 0;
 
     this.bgImage = new Image();
-    this.bgImage.src = 'backgroundImage.webp;
+    this.bgImage.src = '/images/backgroundImage.jpg';
   }
 
   draw() {
