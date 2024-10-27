@@ -4,12 +4,13 @@
 //write gameLoop function
 
 export default class Background {
-  constructor(ctx, width, height) {
+  constructor(ctx, width, height, speed, scaleRatio) {
     this.ctx = ctx;
     this.canvas = ctx.canvas;
     this.width = width;
     this.height = height;
     this.speed = speed;
+    this.scaleRatio = scaleRatio;
 
     this.x = 0;
     this.y = 0;
