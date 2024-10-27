@@ -1,5 +1,5 @@
 //draws sprite onto webpage
-export default class Player {
+export default class SpriteImage {
     constructor(ctx,width, height, scaleRatio){
         this.ctx = ctx;
         this.canvas = ctx.canvas;
