@@ -1,4 +1,5 @@
 import Background from "./Background.js";
+import SpriteImage from "./SpriteImage.js";
 
 const WINDOW_WIDTH = 800;
 const WINDOW_HEIGHT = 200;
