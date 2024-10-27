@@ -1,5 +1,3 @@
-import Background from "./Background.js";
-
 // Pomodoro timer variables
 let timer;
 let workTime = 6; // Set to 6 seconds for testing
