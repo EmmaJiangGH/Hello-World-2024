@@ -28,7 +28,7 @@ export default class Background {
     }
   }
 
-  update() {
-    this.x -= 5;
+  update(frameTimeDelta) {
+    this.x -= this.speed * frameTimeDelta * this.scaleRatio;
   }
 }
