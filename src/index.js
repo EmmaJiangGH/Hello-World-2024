@@ -13,7 +13,7 @@ const BG_SPEED = 0.3;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let sprite = null;
-let bg - null;
+let bg = null;
 let scaleRatio = null;
 let previousTime = null;
 
@@ -37,6 +37,7 @@ function setScreen(){
 function clearScreen() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
 
 function getScaleRatio(){
     const screenHeight = Math.min(
@@ -47,6 +48,7 @@ function getScaleRatio(){
         window.innerWidth, 
         document.documentElement.clientWidth
     )
+    return Math.min(screenWidth / WINDOW_WIDTH, screenHeight / WINDOW_HEIGHT);
 }
 
 function gameLoop(currentTime) {
