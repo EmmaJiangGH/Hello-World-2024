@@ -31,8 +31,4 @@ export default class Background {
     this.x -= this.speed * frameTimeDelta * this.scaleRatio;
   }
 
-  loadImage(imageSrc) {
-    this.image = new Image();
-    this.image.src = imageSrc;
-  }
 }
