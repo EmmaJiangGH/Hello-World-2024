@@ -16,6 +16,10 @@ const resetButton = document.querySelector("#pomodoro button:nth-of-type(3)");
 const taskInput = document.getElementById("todo-input");
 const tasksList = document.getElementById("tasks");
 const cycleDisplay = document.getElementById("cycle-display");
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 const deleteButton = document.createElement("button");
 deleteButton.textContent = "Delete Completed Tasks";
