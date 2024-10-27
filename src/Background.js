@@ -12,7 +12,7 @@ export default class Background {
     this.speed = speed;
     this.scaleRatio = scaleRatio;
     this.image = new Image();
-    this.image.src = 'images/bg.jpg';
+    this.image.src = './images/bg.jpg';
 
     this.x = 0;
     this.y = 0;
