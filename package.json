@@ -2,9 +2,10 @@
   "name": "hello-world-2024",
   "version": "1.0.0",
   "description": "// Hackathon Project\r // Simple Productivity Tracker",
-  "main": "index.js",
+  "main": "add.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node add.js"
   },
   "keywords": [],
   "author": "",
