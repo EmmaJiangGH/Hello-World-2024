@@ -68,4 +68,7 @@ function gameLoop(currentTime) {
     
     requestAnimationFrame(gameLoop);
 }
+
+setScreen();
+requestAnimationFrame(gameLoop);
     
