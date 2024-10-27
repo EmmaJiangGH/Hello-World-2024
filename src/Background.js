@@ -22,6 +22,10 @@ export default class Background {
   draw() {
     this.ctx.drawImage(this.bgImage, this.x, this.y, this.width, this.height);
     this.ctx.drawImage(this.bgImage, this.x + this.width, this.y, this.width, this.height);
+
+    if(this.x < -this.width) {
+      this.x = 0;
+    }
   }
 
   update() {
