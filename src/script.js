@@ -20,6 +20,9 @@ const tasksList = document.getElementById("tasks");
 const cycleDisplay = document.getElementById("cycle-display");
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
+const bgWidth = 600;
+const bgHeight = 234;
+const bgSpeed = 0.3;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
