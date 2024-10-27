@@ -14,6 +14,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let sprite = null;
 let scaleRatio = null;
+let previousTime = null;
 
 function createSprites(){
     const spriteWidthInGame = SPRITE_WIDTH * scaleRatio;
@@ -36,6 +37,10 @@ function setScreen(){
     createSprites();
 }
 
+function clearScreen() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 function getScaleRatio(){
     const screenHeight = Math.min(
         window.innerHeight, 
@@ -46,3 +51,20 @@ function getScaleRatio(){
         document.documentElement.clientWidth
     )
 }
+
+function gameLoop(currentTime) {
+    if(previousTime === null) {
+        previousTime = currentTime;
+        requestAnimationFrame(gameLoop);
+        return;
+    }
+    const frameTimeDelta = currentTime - previousTime;
+    previousTime = currentTime;
+    clearScreen();
+
+    //update game objects
+
+    
+    requestAnimationFrame(gameLoop);
+}
+    
