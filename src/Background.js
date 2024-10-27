@@ -18,4 +18,7 @@ export default class Background {
     this.bgImage = new Image();
     this.bgImage.src = "Hello-World-2024/backgroundImage";
   }
+
+  draw() {
+    this.ctx.drawImage(this.bgImage, this.x, this.y, this.width, this.height);
 }
