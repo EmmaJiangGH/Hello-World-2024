@@ -24,6 +24,7 @@ public class ChangeRatePU extends Thread implements PowerUp {
     }
 
     public void run() {
+        //display name above sprite for duration
         sprite.setPoweredUp(duration);
         int originalRate = sprite.getRate();
         sprite.setRate(newRate);
