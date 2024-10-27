@@ -1,4 +1,4 @@
-import Background from "./Background.js";
+
 
 const WINDOW_WIDTH = 800;
 const WINDOW_HEIGHT = 200;
