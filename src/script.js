@@ -4,18 +4,18 @@ let workTime = 6; // Set to 6 seconds for testing
 let breakTime = 3; // Set to 3 seconds for testing
 let timeLeft = workTime;
 let isRunning = false;
-let pomodoroLoop = 0; // Count the number of work loops completed
+let pomodoroLoop = 0;
+let workCyclesCompleted = 0; // Track only work cycles
 let tasksCompleted = 0;
-let timeStudied = 0;
-
 const totalCycles = 4; // Circles to display
+
 const timerDisplay = document.getElementById("timer");
 const startButton = document.querySelector("#pomodoro button:nth-of-type(1)");
 const pauseButton = document.querySelector("#pomodoro button:nth-of-type(2)");
 const resetButton = document.querySelector("#pomodoro button:nth-of-type(3)");
 const taskInput = document.getElementById("todo-input");
 const tasksList = document.getElementById("tasks");
-const cycleDisplay = document.getElementById("cycle-display"); 
+const cycleDisplay = document.getElementById("cycle-display");
 
 const deleteButton = document.createElement("button");
 deleteButton.textContent = "Delete Completed Tasks";
@@ -23,6 +23,17 @@ deleteButton.onclick = deleteCompletedTasks;
 document.getElementById("todo-list").appendChild(deleteButton);
 
 const addTaskButton = document.querySelector("#todo-list button");
+
+function loadProgress() {
+    fetch('http://localhost:3000/load-progress')
+        .then(response => response.json())
+        .then(data => {
+            tasksCompleted = data.tasksCompleted || 0; // Load tasks completed
+            workCyclesCompleted = data.workCycles || 0; // Load work cycles
+            updateCycleDisplay(); // Update the display based on loaded data
+        })
+        .catch(error => console.error('Error loading progress:', error));
+}
 
 function updateTimerDisplay() {
     let minutes = Math.floor(timeLeft / 60);
@@ -32,63 +43,54 @@ function updateTimerDisplay() {
 
 function updateCycleDisplay() {
     cycleDisplay.innerHTML = "";
-    const completedWorkCycles = Math.floor(pomodoroLoop / 2); // Only work cycles count
-
     for (let i = 0; i < totalCycles; i++) {
         const circle = document.createElement("span");
         circle.className = "cycle-indicator";
-        if (i < completedWorkCycles) {
+        if (i < workCyclesCompleted % totalCycles) {
             circle.classList.add("completed");
         }
         cycleDisplay.appendChild(circle);
     }
 }
 
-function startTimer() {
+function startPomodoro() {
     if (!isRunning) {
         isRunning = true;
-
-        // Set timeLeft for the first cycle
-        timeLeft = workTime; // Reset to work time when starting
-        updateTimerDisplay(); // Display initial time
-
-        timer = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                updateTimerDisplay();
-            } else {
-                // When timer hits 0, switch between work and break cycles
-                pomodoroLoop++;
-                updateCycleDisplay(); // Update cycle display on every cycle switch
-
-                if (pomodoroLoop % 2 === 0) { 
-                    tasksCompleted++;
-                    saveProgress(); // Call the save function here
-                }
-
-                if (pomodoroLoop % 2 === 0) { 
-                    timeLeft = workTime; // Reset to work time
-                } else {
-                    timeLeft = breakTime; // Switch to break time
-                }
-
-                updateTimerDisplay(); // Show updated time immediately for new cycle
-            }
-        }, 1000);
+        timeLeft = workTime;  // Ensure starting with work time
+        timer = setInterval(runPomodoro, 1000);  // Start the timer interval
     }
 }
 
-function pauseTimer() {
+function runPomodoro() {
+    if (timeLeft > 0) {
+        timeLeft--;
+        updateTimerDisplay();
+    } else {
+        if (pomodoroLoop % 2 === 0) { // Only track work cycles
+            workCyclesCompleted++;
+            updateCycleDisplay();
+            saveProgress(); // Automatically save after each work cycle
+        }
+        pomodoroLoop++; // Increment the total loop
+
+        // Reset time for the next cycle
+        timeLeft = (pomodoroLoop % 2 === 0) ? workTime : breakTime;
+        updateTimerDisplay();
+    }
+}
+
+function pausePomodoro() {
     clearInterval(timer);
     isRunning = false;
 }
 
-function resetTimer() {
+function resetPomodoro() {
     clearInterval(timer);
     timeLeft = workTime;
-    updateTimerDisplay();
     isRunning = false;
     pomodoroLoop = 0;
+    workCyclesCompleted = 0;
+    updateTimerDisplay();
     updateCycleDisplay();
 }
 
@@ -100,6 +102,7 @@ function deleteCompletedTasks() {
             tasksCompleted++;
         }
     }
+    saveProgress(); // Update progress after deleting tasks
 }
 
 function addTask() {
@@ -114,49 +117,44 @@ function addTask() {
         checkbox.type = "checkbox";
         checkbox.addEventListener("change", () => {
             listItem.style.textDecoration = checkbox.checked ? "line-through" : "none";
+            saveProgress();
         });
 
         listItem.prepend(checkbox);
         tasksList.appendChild(listItem);
-        taskInput.value = ""; // Clear input field after adding
+        taskInput.value = ""; 
     } else if (listItems >= 5) {
-        alert("You can only add up to 5 tasks.");
+        alert("You can only add up to 5 tasks."); // Alert if limit is reached
     }
 }
 
-// Function to save progress to JSON file
 function saveProgress() {
-    const data = {
+    const progressData = {
         tasksCompleted,
-        workLoops: Math.floor(pomodoroLoop / 2) // Count of completed work loops
+        workCycles: workCyclesCompleted // Ensure you're tracking work cycles
     };
 
-    fetch('/save-progress', { // Adjusted endpoint
+    fetch('http://localhost:3000/save-progress', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(progressData)
     })
     .then(response => response.text())
-    .then(data => {
-        console.log(data);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+    .then(data => console.log(data))
+    .catch(error => console.error('Error saving progress:', error));
 }
 
 
 
+// Initial setup
+loadProgress();
 document.getElementById("save-data-button").remove(); // Remove save button as it's no longer needed
 addTaskButton.addEventListener("click", addTask);
-startButton.addEventListener("click", startTimer);
-pauseButton.addEventListener("click", pauseTimer);
-resetButton.addEventListener("click", resetTimer);
+startButton.addEventListener("click", startPomodoro); // Updated to use startPomodoro
+pauseButton.addEventListener("click", pausePomodoro); // Updated to use pausePomodoro
+resetButton.addEventListener("click", resetPomodoro); // Updated to use resetPomodoro
 
-addTaskButton.style.display = "block";
-addTaskButton.style.margin = "20px auto 0";
-
-updateTimerDisplay(); 
+updateTimerDisplay();
 updateCycleDisplay();
