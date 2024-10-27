@@ -13,13 +13,12 @@ class Cumulative_Data_Analysis:
 
     def analyze_data(self):
         df = pd.read_json(self.past_data_file)
-        print("Available columns:", df.columns)
-        self.mean = df.mean(axis=0)
-        self.num_days = df.shape[0]
-        self.median = df.median(axis=0)
-        self.std = df.std(axis=0)
-        self.maxim = df.max(axis=0)
-        self.minim = df.min(axis=0)
+        self.mean = df['minutes_spent_studying'].mean(skipna=False)
+        self.num_days = df['tasks_completed'].shape[0]
+        self.median = df['minutes_spent_studying'].median(skipna=False)
+        self.std = df['minutes_spent_studying'].std(skipna=False)
+        self.maxim = df['minutes_spent_studying'].max(skipna=False)
+        self.minim = df['minutes_spent_studying'].min(skipna=False)
 
     def update_data(self):
         df = pd.read_json(self.past_data_file)
