@@ -63,6 +63,7 @@ function gameLoop(currentTime) {
     clearScreen();
 
     //update game objects
+    bg.update();
 
     
     requestAnimationFrame(gameLoop);
