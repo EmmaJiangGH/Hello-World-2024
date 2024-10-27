@@ -141,7 +141,8 @@ function saveProgress() {
         },
         body: JSON.stringify(progressData)
     })
-    .then(response => response.text())
+    fetch('https://localhost:3000/api')
+    .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error saving progress:', error));
 }
