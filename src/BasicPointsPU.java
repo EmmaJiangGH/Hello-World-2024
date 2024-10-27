@@ -22,6 +22,7 @@ public class BasicPointsPU extends Thread implements PowerUp {
     public void run() {
         sprite.setPoweredUp(true);
         sprite.addPoints(numPoints);
+        //display name for 10 sec
         sprite.setPoweredUp(false);
         return;
         //Get current points of sprite
