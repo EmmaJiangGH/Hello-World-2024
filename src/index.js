@@ -2,17 +2,17 @@ const WINDOW_WIDTH = 800;
 const WINDOW_HEIGHT = 200;
 const SPRITE_WIDTH = 88 / 1.5;
 const SPRITE_HEIGHT = 94 / 1.5;
-let player = null;
+let sprite = null;
 let scaleRatio = null;
 
 function createSprites(){
     const playerWidthInGame = PLAYER_WIDTH * scaleRatio;
     const playerHeightInGame = PLAYER_HEIGHT * scaleRatio;
     
-    player = new Player(ctx, playerWidthInGame, playerHeightInGame, scaleRatio);
+    sprite = new SpriteImage(ctx, playerWidthInGame, playerHeightInGame, scaleRatio);
 }
 
-player.draw();
+sprite.draw();
 
 function setScreen(){
     scaleRatio = getScaleRatio();
