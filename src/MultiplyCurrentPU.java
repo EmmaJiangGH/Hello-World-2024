@@ -20,6 +20,7 @@ public class MultiplyCurrentPU extends Thread implements PowerUp {
     public void run() {
         sprite.setPoweredUp(true);
         sprite.multiplyPoints(factor);
+        //display name for 10 sec
         sprite.setPoweredUp(false);
     }
 
