@@ -6,10 +6,10 @@ let sprite = null;
 let scaleRatio = null;
 
 function createSprites(){
-    const playerWidthInGame = PLAYER_WIDTH * scaleRatio;
-    const playerHeightInGame = PLAYER_HEIGHT * scaleRatio;
+    const spriteWidthInGame = SPRITE_WIDTH * scaleRatio;
+    const spriteHeightInGame = SPRITE_HEIGHT * scaleRatio;
     
-    sprite = new SpriteImage(ctx, playerWidthInGame, playerHeightInGame, scaleRatio);
+    sprite = new SpriteImage(ctx, spriteWidthInGame, spriteHeightInGame, scaleRatio);
 }
 
 sprite.draw();
