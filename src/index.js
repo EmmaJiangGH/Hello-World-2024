@@ -27,7 +27,6 @@ function createSprites(){
     const bgHeightInGame = BG_HEIGHT * scaleRatio;
 
     bg = new Background(ctx, bgWidthInGame, bgHeightInGame, BG_SPEED, scaleRatio);
-    bg.loadImage('../images/bg.jpg');
 }
 
 function setScreen(){
