@@ -27,7 +27,9 @@ function createSprites(){
     bg = new Background(ctx, bgWidthInGame, bgHeightInGame, BG_SPEED, scaleRatio);
 }
 
+//Draw objects
 sprite.draw();
+bg.draw();
 
 function setScreen(){
     scaleRatio = getScaleRatio();
