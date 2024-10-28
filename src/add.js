@@ -5,6 +5,8 @@ const cors = require('cors'); // Import CORS
 const app = express();
 const port = 3000;
 
+app.use(express.static('public')) // so you can stop dragging html files
+
 // Middleware to enable CORS
 app.use(cors());
 
