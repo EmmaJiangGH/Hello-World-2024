@@ -1,6 +1,8 @@
-[
-  {
+{
+  "0": {
     "tasksCompleted": 2,
     "workCycles": 0
-  }
-]
+  },
+  "tasksCompleted": 0,
+  "workCycles": 1
+}
