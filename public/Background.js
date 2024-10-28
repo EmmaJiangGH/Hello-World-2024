@@ -10,7 +10,7 @@ resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 const backgroundImg = new Image();
-backgroundImg.src = "../images/bg.jpg";
+backgroundImg.src = "./images/bg.jpg";
 
 let backgroundX = 0;
 
