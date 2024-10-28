@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <canvas id="myCanvas"></canvas>
+    <div class="content">
+        <div class="container">
+            <h1>Gamified Study Tracker</h1>
+            <div class="sections-container">
+                <!-- Pomodoro Section -->
+                <div id="pomodoro">
+                    <h2>Pomodoro</h2>
+                    <div id="timer">25:00</div>
+                    <button onclick="startPomodoro()">Start</button>
+                    <button onclick="pausePomodoro()">Pause</button>
+                    <button onclick="resetPomodoro()">Reset</button>
+                    <div id="cycle-display" aria-label="Pomodoro Cycle Display"></div>
+                </div>
+
+                <div id="todo-list">
+                    <h2>To Do List</h2>
+                    <input type="text" id="todo-input" placeholder="Add a new task">
+                    <button id="addButton">Add Task</button>
+                    <ul id="tasks"></ul>
+                </div>
+            </div>
+            <button id="save-data-button" style="position: fixed; bottom: 20px; right: 20px;">Save Progress</button>
+        </div>
+        <img src="../images/standing_still.png" width="100" height="100" style="margin-top: 100px">
+    </div>
+    <script src="script.js"></script>
+    <script src="index.js"></script>
+    <script src="background.js"></script>
+</body>
+</html>
